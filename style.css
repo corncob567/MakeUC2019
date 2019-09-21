@@ -34,9 +34,9 @@ h1 {
 }
 .customize-button{
 	width: 100px;
-	position: relative;
-    top: -540px;
-	right: -600px;
+	position: absolute;
+    top: 90px;
+	right: 800px;
 	margin: center;
 	background-color: blue;
 	border: none;
@@ -47,9 +47,9 @@ h1 {
 }
 .shuffle-button{
 	width: 100px;
-	position: relative;
-	top: -571px;
-	right: -800px;
+	position: absolute;
+	top: 90px;
+	right: 650px;
 	margin: center;
 	background-color: blue;
 	border: none;
