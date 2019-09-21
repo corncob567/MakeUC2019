@@ -72,6 +72,7 @@ var Editable = {
  	squares : document.getElementsByClassName('grid-item'),
  	toggle() {
  		if (this.isEditable){
+			$("body").css("background-color", "#00BFFF");
  			this.isEditable = false;
  			for (var i = 0; i < this.squares.length; i++) {
 				this.squares[i].setAttribute('contenteditable', 'false');
@@ -79,6 +80,7 @@ var Editable = {
  		}
  		else {
  			this.isEditable = true;
+			$("body").css("background-color", "white");
  			for (var i = 0; i < this.squares.length; i++) {
 				this.squares[i].setAttribute('contenteditable', 'true');
 			}
@@ -130,6 +132,10 @@ $(document).ready(function(){
     	}
   	});
 });
+
+
+
+		
 
 
 jQuery.fn.darken = function() {

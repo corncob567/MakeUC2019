@@ -26,17 +26,38 @@ body{
 }
 
 h1 {
-        font-family: 'Chewy', serif;
+        font-family: 'Georgia', serif;
         font-size: 48px;
         color: blue;
         text-align: center;
 
 }
-.edit-button{
+.customize-button{
 	width: 100px;
 	position: relative;
-    top: -535px;
-	right: -700px;
+    top: -540px;
+	right: -600px;
 	margin: center;
+	background-color: blue;
+	border: none;
+	color: #01CCFE;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
 }
+.shuffle-button{
+	width: 100px;
+	position: relative;
+	top: -571px;
+	right: -800px;
+	margin: center;
+	background-color: blue;
+	border: none;
+	color: #01CCFE;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+}
+
 
