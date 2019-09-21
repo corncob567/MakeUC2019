@@ -184,6 +184,10 @@ $(document).ready(function() {
 });
 
 
+
+		
+
+
 jQuery.fn.darken = function() {
   $(this).each(function() {
 		var darkenPercent = 35; // darken color by 35 percent
