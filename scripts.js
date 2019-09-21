@@ -3,6 +3,7 @@ function Create2DArray(rows, columns) {
 
   	for (var i=0; i<rows; i++) {
     	arr[i] = new Array(rows);
+    	arr[i].fill("",0,rows);
   	}
   	return arr;
 }
@@ -14,6 +15,7 @@ var Board = {
 	//width : new Number('5'),
 	//height : new Number('5'),
 	table : Create2DArray(height, width),
+	customTable : Create2DArray(height, width),
 	createNumbers : function() {
 		for (var i = 0; i < this.table.length; i++) { // i = column
 			var existingNums = [];
@@ -66,6 +68,18 @@ var Board = {
 			}
 		}
 	},
+	displayCustom : function () {
+		for (var i = 0; i < this.customTable.length; i++) { // i = column
+			for (var j = 0; j < this.customTable[i].length; j++) { // j = row
+				if (FreeSpace.isFree && i == FreeSpace.freeLocation2d[1] && j == FreeSpace.freeLocation2d[0]) {
+					continue;
+				}
+				else {
+					this.grid[(i * width) + j].innerHTML = this.customTable[j][i];
+				}
+			}
+		}
+	},
 	checkWin : function() {
 		//get colors
 		win = false;
@@ -90,6 +104,7 @@ var Board = {
 			}
 		}
 
+
 		winArray = [];
 
 		for(var i = 0; i < 5; i++){
@@ -99,30 +114,23 @@ var Board = {
 			for(var i = 0; i < 5; i ++){
 				winArray = winArray.slice(i*5, (i*5) + 5);
 
+
 				if(winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 					win = true;
 				}
-
 			}
-			
 		}
 
-		diagOneArray = [colorArray[0], colorArray[6], colorArray[12], colorArray[18], colorArray[24]];
-		diagTwoArray = [colorArray[20], colorArray[16], colorArray[12], colorArray[8], colorArray[4]];
-		
-		if(diagOneArray[0] == true && diagOneArray[1] == true && diagOneArray[2] == true && diagOneArray[3] == true && diagOneArray[4] == true){
-			win = true;
-		}
-		if(diagTwoArray[0] == true && diagTwoArray[1] == true && diagTwoArray[2] == true && diagTwoArray[3] == true && diagTwoArray[4] == true){
-			win = true;
-		}
 
 		console.log(winArray);
 		
 		console.log(win);
 		return win;
 
+	
 
+
+		
 	}
 
 }
@@ -133,16 +141,26 @@ var BoardMode = {
 	toggle() {
 		switch($("#modeSelect :selected").val()){
 			case "Custom":
-				$("#IdEditable").attr("hidden",false);
+				if (Editable.isEditable){
+					Editable.toggle();
+				}
+				$(".customize-button").css({'background-color':'blue', 'color':'#01CCFE'});
 				this.mode = "Custom";
+				Board.displayCustom();
 				break;
 			case "Autogen":
-				$("#IdEditable").attr("hidden",true);
+				if (Editable.isEditable){
+					Editable.toggle();
+				}
+				$(".customize-button").css({'background-color':'#8A8CC0', 'color':'#000000'}); 
 				this.mode = "Autogen";
 				Board.displayNumbers();
 				break;
 			case "Images":
-				$("#IdEditable").attr("hidden",false);
+				if (Editable.isEditable){
+					Editable.toggle();
+				}
+				$(".customize-button").css({'background-color':'blue', 'color':'#01CCFE'});
 				this.mode = "Images";
 				break;
 		}
@@ -155,15 +173,19 @@ var Editable = {
  	toggle() {
  		if (BoardMode.mode == "Custom") {
 	 		if (this.isEditable){
-	 			this.isEditable = false; 			
-	 			document.getElementsByName("EditButton")[0].setAttribute('value','Customize');
+	 			this.isEditable = false;
+
+	 			$(".shuffle-button").css({'background-color':'blue', 'color':'#01CCFE'});
+	 			$("#IdEditable").attr("value","Customize");		
 	 			for (var i = 0; i < this.squares.length; i++) {
 					this.squares[i].setAttribute('contenteditable', 'false');
 				}
 	 		}
 	 		else {
 	 			this.isEditable = true;
-	 			document.getElementsByName("EditButton")[0].setAttribute('value','Play');
+
+	 			$(".shuffle-button").css({'background-color':'#8A8CC0', 'color':'#000000'}); 
+	 			$("#IdEditable").attr("value","Play");
 	 			for (var i = 0; i < this.squares.length; i++) {
 					this.squares[i].setAttribute('contenteditable', 'true');
 				}
@@ -182,7 +204,12 @@ var FreeSpace = {
 	toggle() {
 		if (this.isFree) {
 			this.isFree = false;
-			Board.grid[this.freeLocation1d].innerHTML = Board.table[this.freeLocation2d[0]][this.freeLocation2d[1]];
+			if (BoardMode.mode == "Autogen") {
+				Board.grid[this.freeLocation1d].innerHTML = Board.table[this.freeLocation2d[0]][this.freeLocation2d[1]];
+			}
+			if (BoardMode.mode == "Custom"){
+				Board.grid[this.freeLocation1d].innerHTML = Board.customTable[this.freeLocation2d[0]][this.freeLocation2d[1]];
+			}
 		}
 		else {
 			this.isFree = true;
@@ -204,20 +231,21 @@ function toggleEditable() {
 }
 
 function shuffleContents() {
-	if (BoardMode.mode == "Custom"){
+	if (BoardMode.mode == "Custom" && !Editable.isEditable){
 		var newBoard = new Array(Board.grid.length);
 		for (var i = 0; i < Board.grid.length; i++) {
 			while (1) {
 				var randIndex = Math.floor(Math.random() * Board.grid.length);
 				if (newBoard[randIndex] == undefined) {
-					newBoard[randIndex] = Board.grid[i].innerHTML;
+					newBoard[randIndex] = Board.customTable[Math.floor(i / width)][i % width];
 					break; 
 				}
 			}
 		}
 		for (var i = 0; i < Board.grid.length; i++ ) {
-			Board.grid[i].innerHTML = newBoard[i];
+			Board.customTable[Math.floor(i / width)][i % width] = newBoard[i];
 		}
+		Board.displayCustom();
 	}
 	if (BoardMode.mode == "Autogen") {
 		Board.createNumbers();
@@ -238,12 +266,14 @@ function boardCheckWin(){
 
 
 
+
+
 $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
 
-    		
+    			boardCheckWin();
 
     	}
   	});
@@ -251,7 +281,17 @@ $(document).ready(function() {
 });
 
 
-
+$("body").on('DOMSubtreeModified', "#cell", function() {
+	if (BoardMode.mode == "Custom" && Editable.isEditable){
+		for (var i = 0; i < Board.customTable.length; i++) { // i = column
+			for (var j = 0; j < Board.customTable[i].length; j++) { // j = row
+				if (!(FreeSpace.isFree && Board.customTable[FreeSpace.freeLocation2d[0]][FreeSpace.freeLocation2d[1]])) {
+					Board.customTable[j][i] = Board.grid[(i * width) + j].innerHTML;
+				}
+			}
+		}
+	}
+});
 		
 
 
@@ -289,3 +329,4 @@ if ((red<255) && (blue<255) && (green<255)) {
 Board.createNumbers();
 Board.createLetters();
 Board.displayNumbers();
+//$(".customize-button").hide();
