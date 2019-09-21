@@ -59,6 +59,29 @@ var Board = {
 	}
 }
 
+var Editable = {
+	isEditable : false,
+ 	squares : document.getElementsByClassName('grid-item'),
+ 	toggle() {
+ 		if (this.isEditable){
+ 			this.isEditable = false;
+ 			for (var i = 0; i < this.squares.length; i++) {
+				this.squares[i].setAttribute('contenteditable', 'false');
+			}
+ 		}
+ 		else {
+ 			this.isEditable = true;
+ 			for (var i = 0; i < this.squares.length; i++) {
+				this.squares[i].setAttribute('contenteditable', 'true');
+			}
+ 		}
+		
+	}
+}
+
+function toggleEditable() {
+	Editable.toggle();
+}
 
 Board.createNumbers();
 Board.createLetters();
