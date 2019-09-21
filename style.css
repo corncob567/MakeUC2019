@@ -32,6 +32,9 @@ h1 {
         text-align: center;
 
 }
+img{
+	object-fit: none;
+}
 .edit-button{
 	width: 100px;
 	position: relative;
