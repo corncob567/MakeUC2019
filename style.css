@@ -3,16 +3,18 @@
   grid-template-columns: repeat(5, 100px);
   grid-template-rows: repeat(5, 100px);
   padding: 0px;
-  margin-left: 25%;
   
-  width: 50%;
+  text-align: center;
+
+  width: 500px;
+  margin: 0 auto;
 
 }
 .grid-item {
   background-color: #FFFFFF;
   border: 5px solid #0000FF;
   padding: 20px;
-  font-size: 30px;
+  font-size: 23px;
   text-align: center;
 
 }
@@ -27,6 +29,7 @@ h1 {
         font-family: 'Chewy', serif;
         font-size: 48px;
         color: blue;
+        text-align: center;
 
 }
 

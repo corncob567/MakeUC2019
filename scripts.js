@@ -64,3 +64,40 @@ Board.createNumbers();
 Board.createLetters();
 Board.displayNumbers();
 // console.log(Board.grid);
+
+
+
+$(document).ready(function(){
+	$(".grid-item").click(function(){
+    	$(this).darken();
+  	});
+});
+
+
+jQuery.fn.toggleDark = function() {
+  $(this).each(function() {
+		var darkenPercent = 35; // darken color by 35 percent
+		var rgb = $(this).css('background-color');
+		rgb = rgb.replace('rgb(', '').replace(')', '').split(',');
+		var red = $.trim(rgb[0]);
+		var green = $.trim(rgb[1]);
+		var blue = $.trim(rgb[2]);
+				
+		// darken
+		if ()
+		red = parseInt(red * (100 - darkenPercent) / 100);
+		green = parseInt(green * (100 - darkenPercent) / 100);
+		blue = parseInt(blue * (100 - darkenPercent) / 100);
+		// lighten
+		/* red = parseInt(red * (100 + darkenPercent) / 100);
+		green = parseInt(green * (100 + darkenPercent) / 100);
+		blue = parseInt(blue * (100 + darkenPercent) / 100); */
+		
+		rgb = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+		
+		$(this).css('background-color', rgb);
+  });
+  return this;
+}
+
+
