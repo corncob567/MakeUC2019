@@ -112,20 +112,31 @@ var Board = {
 				winArray.push(colorArray[j]);
 			}
 			for(var i = 0; i < 5; i ++){
-				winArray = winArray.slice(i*5, (i*5) + 5);
+				winTestArray = winArray.slice(i*5, (i*5) + 5);
 
 
-				if(winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+				if(winTestArray[0] == true && winTestArray[1] == true && winTestArray[2] == true && winTestArray[3] == true && winTestArray[4] == true){
 					win = true;
 				}
 			}
 		}
 
+	DiagArrayOne = [colorArray[0], colorArray[6], colorArray[12],colorArray[18],colorArray[24]];
+	DiagArrayTwo = [colorArray[20], colorArray[16], colorArray[12], colorArray[8], colorArray[4]];
 
-		console.log(winArray);
-		
-		console.log(win);
-		return win;
+	if(DiagArrayOne[0] == true && DiagArrayOne[1] == true && DiagArrayOne[2] == true && DiagArrayOne[3] == true && DiagArrayOne[4] == true){
+		win = true;
+	}
+
+
+	if(DiagArrayTwo[0] == true && DiagArrayTwo[1] == true && DiagArrayTwo[2] == true && DiagArrayTwo[3] == true && DiagArrayTwo[4] == true){
+		win = true;
+	}
+
+	console.log(winArray);
+	
+	console.log(win);
+	return win;
 		
 	}
 
