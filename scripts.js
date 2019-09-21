@@ -140,9 +140,6 @@ jQuery.fn.darken = function() {
 		var red = $.trim(rgb[0]);
 		var green = $.trim(rgb[1]);
 		var blue = $.trim(rgb[2]);
-		console.log("red: " + red);
-		console.log("blue: " + blue);
-		console.log("green: " + green);
 		// darken
 if ((red<255) && (blue<255) && (green<255)){
 
