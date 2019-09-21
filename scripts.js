@@ -73,8 +73,46 @@ var Board = {
 		winArray = [];
 		for (var i = 0; i < this.grid.length; i++) {
 			colorArray[i] = getComputedStyle(this.grid[i]).backgroundColor;
+			
+			if (colorArray[i] == "rgb(160, 160, 160)"){
+				colorArray[i] = true;
+			}
+			else{
+				colorArray[i] = false;
+			}
 		}
+
+		//process colorArray 
+
 		//check horizontally
+		for (var i = 0; i < 25; i = i + 5){
+			//read across
+			for (var j = i; j < (i+5); j++){
+				winArray[j-i] = colorArray[i+j];
+			}
+		}
+
+		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+			win = true;
+		}
+
+		console.log("horizontally " + winArray);
+
+		//check horizontally
+		for (var i = 0; i < 5; i++){
+			//read down
+			for (var j = i; j< i + 20; j= j + 5 ){
+				winArray[i] = colorArray[j];
+			}
+		}
+
+		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+			win = true;
+		}
+
+		console.log("vertically " + winArray);
+		//check horizontally
+		/*
 		for (var i = 0; i < colorArray.length; i = i + 5){
 			for (var j = i; j < 5; j++){
 				if (colorArray[j] == "rgb(160, 160, 160)"){
@@ -92,15 +130,21 @@ var Board = {
 
 		for (var i = 0; i < 5; i++){
 			for (var j = 0; j< 5; j ++){
-				winArray[i] = this.grid[(i*5)+j];
+				winArray[i] = colorArray[(j*5)+i];
 			}
+		if (colorArray[i] == "rgb(160, 160, 160)"){
+			winArray[i] = true;
+		}
+		else{
+			winArray[i] = false;
+		}
 			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 				win = true;
 			}
 			
-		}
+		}*/
 
-		console.log(winArray);
+		console.log(win);
 		return win;
 
 
