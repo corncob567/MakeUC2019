@@ -6,6 +6,7 @@ function Create2DArray(rows, columns) {
   	}
   	return arr;
 }
+
 var width = 5;
 var height = 5;
 var Board = {
@@ -67,23 +68,51 @@ var Board = {
 	}
 }
 
+var BoardMode = {
+	mode : "Autogen",
+	selector : document.getElementById("modeSelect"),
+	toggle() {
+		switch($("#modeSelect :selected").val()){
+			case "Custom":
+				$("#IdEditable").attr("hidden",false);
+				this.mode = "Custom";
+				break;
+			case "Autogen":
+				$("#IdEditable").attr("hidden",true);
+				this.mode = "Autogen";
+				Board.displayNumbers();
+				break;
+			case "Images":
+				$("#IdEditable").attr("hidden",false);
+				this.mode = "Images";
+				break;
+		}
+	}
+}
+
 var Editable = {
 	isEditable : false,
  	squares : document.getElementsByClassName('grid-item'),
  	toggle() {
- 		if (this.isEditable){
- 			this.isEditable = false;
- 			for (var i = 0; i < this.squares.length; i++) {
-				this.squares[i].setAttribute('contenteditable', 'false');
-			}
- 		}
- 		else {
- 			this.isEditable = true;
- 			for (var i = 0; i < this.squares.length; i++) {
-				this.squares[i].setAttribute('contenteditable', 'true');
-			}
- 		}
-		
+ 		if (BoardMode.mode == "Custom") {
+	 		if (this.isEditable){
+	 			this.isEditable = false; 			
+	 			document.getElementsByName("EditButton")[0].setAttribute('value','Customize');
+	 			for (var i = 0; i < this.squares.length; i++) {
+					this.squares[i].setAttribute('contenteditable', 'false');
+				}
+	 		}
+	 		else {
+	 			this.isEditable = true;
+	 			document.getElementsByName("EditButton")[0].setAttribute('value','Play');
+	 			for (var i = 0; i < this.squares.length; i++) {
+					this.squares[i].setAttribute('contenteditable', 'true');
+				}
+	 		}
+	 	}
+		if (BoardMode.mode == "Images") {
+			// Do nothing
+		}
 	}
 }
 
@@ -103,6 +132,10 @@ var FreeSpace = {
 	}
 }
 
+function updateMode() {
+	BoardMode.toggle();
+}
+
 function toggleFreeSpace() { 
 	FreeSpace.toggle();
 }
@@ -112,10 +145,29 @@ function toggleEditable() {
 }
 
 function shuffleContents() {
-	Board.createNumbers();
-	Board.createLetters();
-	Board.displayNumbers();
-	//var squareValue = Math.ceil(Math.random() * Board.grid.length);
+	if (BoardMode.mode == "Custom"){
+		var newBoard = new Array(Board.grid.length);
+		for (var i = 0; i < Board.grid.length; i++) {
+			while (1) {
+				var randIndex = Math.floor(Math.random() * Board.grid.length);
+				if (newBoard[randIndex] == undefined) {
+					newBoard[randIndex] = Board.grid[i].innerHTML;
+					break; 
+				}
+			}
+		}
+		for (var i = 0; i < Board.grid.length; i++ ) {
+			Board.grid[i].innerHTML = newBoard[i];
+		}
+	}
+	if (BoardMode.mode == "Autogen") {
+		Board.createNumbers();
+		Board.createLetters();
+		Board.displayNumbers();
+	}
+	if (BoardMode.mode == "Images") {
+		console.log("Not yet supported");
+	}
 }
 
 
@@ -123,8 +175,8 @@ function shuffleContents() {
 
 
 
-$(document).ready(function(){
-	$(".grid-item").click(function(){
+$(document).ready(function() {
+	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
     	}
@@ -141,7 +193,7 @@ jQuery.fn.darken = function() {
 		var green = $.trim(rgb[1]);
 		var blue = $.trim(rgb[2]);
 		// darken
-if ((red<255) && (blue<255) && (green<255)){
+if ((red<255) && (blue<255) && (green<255)) {
 
 		red = 255;
 		green = 255;
@@ -162,6 +214,6 @@ if ((red<255) && (blue<255) && (green<255)){
   return this;
 }
 
-
-shuffleContents();
-
+Board.createNumbers();
+Board.createLetters();
+Board.displayNumbers();
