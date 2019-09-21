@@ -92,7 +92,9 @@ Board.displayNumbers();
 
 $(document).ready(function(){
 	$(".grid-item").click(function(){
-    	$(this).darken();
+		if (!Editable.isEditable) {	
+    		$(this).darken();
+    	}
   	});
 });
 
@@ -109,7 +111,7 @@ jQuery.fn.darken = function() {
 		console.log("blue: " + blue);
 		console.log("green: " + green);
 		// darken
-		if ((red<255) && (blue<255) && (green<255)){
+if ((red<255) && (blue<255) && (green<255)){
 
 		red = 255;
 		green = 255;
