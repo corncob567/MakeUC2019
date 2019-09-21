@@ -319,7 +319,9 @@ $("body").on('DOMSubtreeModified', "#cell", function() {
 	if (BoardMode.mode == "Custom" && Editable.isEditable){
 		for (var i = 0; i < Board.customTable.length; i++) { // i = column
 			for (var j = 0; j < Board.customTable[i].length; j++) { // j = row
-				Board.customTable[j][i] = Board.grid[(i * width) + j].innerHTML
+				if (!(FreeSpace.isFree && Board.customTable[FreeSpace.freeLocation2d[0]][FreeSpace.freeLocation2d[1]])) {
+					Board.customTable[j][i] = Board.grid[(i * width) + j].innerHTML;
+				}
 			}
 		}
 	}
