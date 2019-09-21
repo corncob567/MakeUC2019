@@ -32,39 +32,10 @@ h1 {
         text-align: center;
 
 }
-<<<<<<< HEAD
+
 img{
 	object-fit: none;
 }
-.edit-button{
-=======
-.customize-button{
->>>>>>> af7c200780845d8c6b311fac05dbfe80631738fa
-	width: 100px;
-	position: absolute;
-    top: 90px;
-	right: 800px;
-	margin: center;
-	background-color: blue;
-	border: none;
-	color: #01CCFE;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-}
-.shuffle-button{
-	width: 100px;
-	position: absolute;
-	top: 90px;
-	right: 650px;
-	margin: center;
-	background-color: blue;
-	border: none;
-	color: #01CCFE;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-}
-}
+
 
 

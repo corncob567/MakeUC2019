@@ -230,7 +230,7 @@ $(document).ready(function() {
 });
 
 
-jQuery.fn.victory = functinon() {
+jQuery.fn.victory = function() {
 	if (checkWin() = true){
 		alert("Bingo?")
 		$this.dialog("Bingo!")
