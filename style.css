@@ -20,7 +20,7 @@
 }
 
 body{
-	background-color: #00BFFF;
+	background-image: linear-gradient(to right, rgba(0,0,255,0), rgba(0,0,255,1));;
 	font-family: 'Crete Round', serif;
     font-size: 24px;
 }

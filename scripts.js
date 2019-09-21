@@ -94,6 +94,7 @@ var Board = {
 
 		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 			win = true;
+			alert("Bingo");
 		}
 
 		console.log("horizontally " + winArray);
@@ -108,6 +109,7 @@ var Board = {
 
 		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 			win = true;
+			alert("Bingo");
 		}
 
 		console.log("vertically " + winArray);
@@ -124,6 +126,7 @@ var Board = {
 			}
 			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 				win = true;
+				alert("Bingo");
 			}
 		}
 		
@@ -140,6 +143,7 @@ var Board = {
 		}
 			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 				win = true;
+				alert("Bingo");
 			}
 			
 		}*/
@@ -263,25 +267,21 @@ function boardCheckWin(){
 
 
 
+
+
 $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
     			boardCheckWin();
+				
     	}
   	});
 
 });
 
 
-jQuery.fn.victory = function() {
-	if (checkWin() = true){
-		alert("Bingo?")
-		$this.dialog("Bingo!")
-		$this.dialog("Cancel")
-	}
-}
-	
+
 		
 
 
