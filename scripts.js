@@ -97,7 +97,7 @@ $(document).ready(function(){
 });
 
 
-jQuery.fn.toggleDark = function() {
+jQuery.fn.darken = function() {
   $(this).each(function() {
 		var darkenPercent = 35; // darken color by 35 percent
 		var rgb = $(this).css('background-color');
@@ -105,16 +105,23 @@ jQuery.fn.toggleDark = function() {
 		var red = $.trim(rgb[0]);
 		var green = $.trim(rgb[1]);
 		var blue = $.trim(rgb[2]);
-				
+		console.log("red: " + red);
+		console.log("blue: " + blue);
+		console.log("green: " + green);
 		// darken
-		if ()
-		red = parseInt(red * (100 - darkenPercent) / 100);
-		green = parseInt(green * (100 - darkenPercent) / 100);
-		blue = parseInt(blue * (100 - darkenPercent) / 100);
+		if ((red<255) && (blue<255) && (green<255)){
+
+		red = 255;
+		green = 255;
+		blue = 255;
+		}
 		// lighten
-		/* red = parseInt(red * (100 + darkenPercent) / 100);
-		green = parseInt(green * (100 + darkenPercent) / 100);
-		blue = parseInt(blue * (100 + darkenPercent) / 100); */
+		else{
+		red = 160;
+		green = 160;
+		blue = 160; 
+		
+		}
 		
 		rgb = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 		
@@ -122,5 +129,6 @@ jQuery.fn.toggleDark = function() {
   });
   return this;
 }
+
 
 
