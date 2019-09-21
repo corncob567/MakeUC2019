@@ -126,10 +126,6 @@ var Board = {
 		
 		console.log(win);
 		return win;
-
-	
-
-
 		
 	}
 
@@ -273,7 +269,9 @@ $(document).ready(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
 
-    			boardCheckWin();
+    		if(boardCheckWin()){
+    			alert("BINGO");
+    		}
 
     	}
   	});
