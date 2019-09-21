@@ -82,68 +82,43 @@ var Board = {
 			}
 		}
 
-		//process colorArray 
+		for(var i = 0; i < 5; i++){
+			winArray = colorArray.slice(i*5, (i*5)+5);
 
-		//check horizontally
-		for (var i = 0; i < 25; i = i + 5){
-			//read across
-			for (var j = i; j < (i+5); j++){
-				winArray[j-i] = colorArray[i+j];
-			}
-		}
-
-		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
-			win = true;
-		}
-
-		console.log("horizontally " + winArray);
-
-		//check horizontally
-		for (var i = 0; i < 5; i++){
-			//read down
-			for (var j = i; j< i + 20; j= j + 5 ){
-				winArray[i] = colorArray[j];
-			}
-		}
-
-		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
-			win = true;
-		}
-
-		console.log("vertically " + winArray);
-		//check horizontally
-		/*
-		for (var i = 0; i < colorArray.length; i = i + 5){
-			for (var j = i; j < 5; j++){
-				if (colorArray[j] == "rgb(160, 160, 160)"){
-					winArray[j] = true;
-				}
-				else{
-					winArray[j] = false;
-				}
-			}
-			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+			if(winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 				win = true;
 			}
 		}
-		
 
-		for (var i = 0; i < 5; i++){
-			for (var j = 0; j< 5; j ++){
-				winArray[i] = colorArray[(j*5)+i];
+		winArray = [];
+
+		for(var i = 0; i < 5; i++){
+			for(var j = i; j < 25; j = j + 5){
+				winArray.push(colorArray[j]);
 			}
-		if (colorArray[i] == "rgb(160, 160, 160)"){
-			winArray[i] = true;
-		}
-		else{
-			winArray[i] = false;
-		}
-			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
-				win = true;
+			for(var i = 0; i < 5; i ++){
+				winArray = winArray.slice(i*5, (i*5) + 5);
+
+				if(winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+					win = true;
+				}
+
 			}
 			
-		}*/
+		}
 
+		diagOneArray = [colorArray[0], colorArray[6], colorArray[12], colorArray[18], colorArray[24]];
+		diagTwoArray = [colorArray[20], colorArray[16], colorArray[12], colorArray[8], colorArray[4]];
+		
+		if(diagOneArray[0] == true && diagOneArray[1] == true && diagOneArray[2] == true && diagOneArray[3] == true && diagOneArray[4] == true){
+			win = true;
+		}
+		if(diagTwoArray[0] == true && diagTwoArray[1] == true && diagTwoArray[2] == true && diagTwoArray[3] == true && diagTwoArray[4] == true){
+			win = true;
+		}
+
+		console.log(winArray);
+		
 		console.log(win);
 		return win;
 
@@ -267,7 +242,9 @@ $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
-    			boardCheckWin();
+
+    		
+
     	}
   	});
 
@@ -304,6 +281,7 @@ if ((red<255) && (blue<255) && (green<255)) {
 		rgb = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 		
 		$(this).css('background-color', rgb);
+		boardCheckWin();
   });
   return this;
 }
