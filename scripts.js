@@ -92,12 +92,14 @@ Board.displayNumbers();
 
 $(document).ready(function(){
 	$(".grid-item").click(function(){
-    	$(this).darken();
+		if (!Editable.isEditable) {	
+    		$(this).darken();
+    	}
   	});
 });
 
 
-jQuery.fn.toggleDark = function() {
+jQuery.fn.darken = function() {
   $(this).each(function() {
 		var darkenPercent = 35; // darken color by 35 percent
 		var rgb = $(this).css('background-color');
@@ -107,7 +109,7 @@ jQuery.fn.toggleDark = function() {
 		var blue = $.trim(rgb[2]);
 				
 		// darken
-		if ()
+		//if ()
 		red = parseInt(red * (100 - darkenPercent) / 100);
 		green = parseInt(green * (100 - darkenPercent) / 100);
 		blue = parseInt(blue * (100 - darkenPercent) / 100);
