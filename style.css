@@ -32,7 +32,11 @@ h1 {
         text-align: center;
 
 }
+img{
+	object-fit: none;
+}
 .customize-button{
+
 	width: 100px;
 	position: absolute;
     top: 90px;

@@ -79,7 +79,58 @@ var Board = {
 				}
 			}
 		}
+	},
+	checkWin : function() {
+		//get colors
+		win = false;
+		colorArray = [];
+		winArray = [];
+		for (var i = 0; i < this.grid.length; i++) {
+			colorArray[i] = getComputedStyle(this.grid[i]).backgroundColor;
+			
+			if (colorArray[i] == "rgb(160, 160, 160)"){
+				colorArray[i] = true;
+			}
+			else{
+				colorArray[i] = false;
+			}
+		}
+
+		//process colorArray 
+
+		//check horizontally
+		for (var i = 0; i < 25; i = i + 5){
+			//read across
+			for (var j = i; j < (i+5); j++){
+				winArray[j-i] = colorArray[i+j];
+			}
+		}
+
+		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+			win = true;
+		}
+
+		console.log("horizontally " + winArray);
+
+		//check horizontally
+		for (var i = 0; i < 5; i++){
+			//read down
+			for (var j = i; j< i + 20; j= j + 5 ){
+				winArray[i] = colorArray[j];
+			}
+		}
+
+		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+			win = true;
+		}
+
+		console.log("vertically " + winArray);
+
+		console.log(win);
+		return win;
+
 	}
+
 }
 
 var BoardMode = {
@@ -202,6 +253,10 @@ function shuffleContents() {
 	}
 }
 
+function boardCheckWin(){
+	Board.checkWin();
+}
+
 
 // console.log(Board.grid);
 
@@ -211,8 +266,10 @@ $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
+    			boardCheckWin();
     	}
   	});
+
 });
 
 
