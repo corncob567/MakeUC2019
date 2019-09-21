@@ -1,15 +1,18 @@
 function Create2DArray(rows, columns) {
-  var arr = new Array(columns);
+  	var arr = new Array(columns);
 
-  for (var i=0; i<rows; i++) {
-     arr[i] = new Array(rows);
-  }
-  return arr;
+  	for (var i=0; i<rows; i++) {
+    	arr[i] = new Array(rows);
+  	}
+  	return arr;
 }
-
+var width = 5;
+var height = 5;
 var Board = {
 	grid : document.getElementsByClassName('grid-item'),
-	table : Create2DArray(5,5),
+	//width : new Number('5'),
+	//height : new Number('5'),
+	table : Create2DArray(height, width),
 	createNumbers : function() {
 		for (var i = 0; i < this.table.length; i++) { // i = column
 			var existingNums = [];
@@ -53,7 +56,12 @@ var Board = {
 	displayNumbers : function() {
 		for (var i = 0; i < this.table.length; i++) { // i = column
 			for (var j = 0; j < this.table[i].length; j++) { // j = row
-				this.grid[(i * 5) + j].innerHTML = this.table[j][i];
+				if (FreeSpace.isFree && i == FreeSpace.freeLocation2d[1] && j == FreeSpace.freeLocation2d[0]) {
+					continue;
+				}
+				else {
+					this.grid[(i * width) + j].innerHTML = this.table[j][i];
+				}
 			}
 		}
 	}
@@ -79,13 +87,38 @@ var Editable = {
 	}
 }
 
+var FreeSpace = {
+	isFree : false,
+	freeLocation2d : [Math.floor(width / 2), Math.floor(width / 2)],
+	freeLocation1d : (Math.floor(width / 2) * width) + (Math.floor(width / 2)),
+	toggle() {
+		if (this.isFree) {
+			this.isFree = false;
+			Board.grid[this.freeLocation1d].innerHTML = Board.table[this.freeLocation2d[0]][this.freeLocation2d[1]];
+		}
+		else {
+			this.isFree = true;
+			Board.grid[this.freeLocation1d].innerHTML = "FREE";
+		}
+	}
+}
+
+function toggleFreeSpace() { 
+	FreeSpace.toggle();
+}
+
 function toggleEditable() {
 	Editable.toggle();
 }
 
-Board.createNumbers();
-Board.createLetters();
-Board.displayNumbers();
+function shuffleContents() {
+	Board.createNumbers();
+	Board.createLetters();
+	Board.displayNumbers();
+	//var squareValue = Math.ceil(Math.random() * Board.grid.length);
+}
+
+
 // console.log(Board.grid);
 
 
@@ -107,9 +140,6 @@ jQuery.fn.darken = function() {
 		var red = $.trim(rgb[0]);
 		var green = $.trim(rgb[1]);
 		var blue = $.trim(rgb[2]);
-		console.log("red: " + red);
-		console.log("blue: " + blue);
-		console.log("green: " + green);
 		// darken
 if ((red<255) && (blue<255) && (green<255)){
 
@@ -133,4 +163,5 @@ if ((red<255) && (blue<255) && (green<255)){
 }
 
 
+shuffleContents();
 
