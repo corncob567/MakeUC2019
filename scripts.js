@@ -108,6 +108,7 @@ var Board = {
 
 		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 			win = true;
+			alert("Bingo");
 		}
 
 		console.log("horizontally " + winArray);
@@ -122,13 +123,49 @@ var Board = {
 
 		if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 			win = true;
+			alert("Bingo");
 		}
 
 		console.log("vertically " + winArray);
+		//check horizontally
+		/*
+		for (var i = 0; i < colorArray.length; i = i + 5){
+			for (var j = i; j < 5; j++){
+				if (colorArray[j] == "rgb(160, 160, 160)"){
+					winArray[j] = true;
+				}
+				else{
+					winArray[j] = false;
+				}
+			}
+			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+				win = true;
+				alert("Bingo");
+			}
+		}
+		
+
+		for (var i = 0; i < 5; i++){
+			for (var j = 0; j< 5; j ++){
+				winArray[i] = colorArray[(j*5)+i];
+			}
+		if (colorArray[i] == "rgb(160, 160, 160)"){
+			winArray[i] = true;
+		}
+		else{
+			winArray[i] = false;
+		}
+			if( winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
+				win = true;
+				alert("Bingo");
+			}
+			
+		}
+
 
 		console.log(win);
 		return win;
-
+		*/
 	}
 
 }
@@ -264,11 +301,14 @@ function boardCheckWin(){
 
 
 
+
+
 $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
     			boardCheckWin();
+				
     	}
   	});
 
