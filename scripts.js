@@ -140,16 +140,23 @@ jQuery.fn.darken = function() {
 		var red = $.trim(rgb[0]);
 		var green = $.trim(rgb[1]);
 		var blue = $.trim(rgb[2]);
-				
+		console.log("red: " + red);
+		console.log("blue: " + blue);
+		console.log("green: " + green);
 		// darken
-		//if ()
-		red = parseInt(red * (100 - darkenPercent) / 100);
-		green = parseInt(green * (100 - darkenPercent) / 100);
-		blue = parseInt(blue * (100 - darkenPercent) / 100);
+if ((red<255) && (blue<255) && (green<255)){
+
+		red = 255;
+		green = 255;
+		blue = 255;
+		}
 		// lighten
-		/* red = parseInt(red * (100 + darkenPercent) / 100);
-		green = parseInt(green * (100 + darkenPercent) / 100);
-		blue = parseInt(blue * (100 + darkenPercent) / 100); */
+		else{
+		red = 160;
+		green = 160;
+		blue = 160; 
+		
+		}
 		
 		rgb = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 		
@@ -158,4 +165,6 @@ jQuery.fn.darken = function() {
   return this;
 }
 
+
 shuffleContents();
+
