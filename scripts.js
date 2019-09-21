@@ -134,7 +134,9 @@ var Board = {
 	}
 
 	console.log(winArray);
-	
+	if(win==true){
+		alert("BINGO");
+	}
 	console.log(win);
 	return win;
 		
