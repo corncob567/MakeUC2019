@@ -332,7 +332,7 @@ if ((red<255) && (blue<255) && (green<255)) {
 		rgb = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 		
 		$(this).css('background-color', rgb);
-		boardCheckWin();
+		//boardCheckWin();
   });
   return this;
 }
