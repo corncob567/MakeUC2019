@@ -8,6 +8,7 @@ function Create2DArray(rows, columns) {
 }
 
 var Board = {
+	htmlTable : document.getElementById('bingoBoard'),
 	table : Create2DArray(5,5),
 	createNumbers : function() {
 		for (var i = 0; i < this.table.length; i++) { // i = column
@@ -50,7 +51,11 @@ var Board = {
 		}
 	},
 	displayNumbers : function() {
-		console.log(this.table)
+		for (var i = 0; i < this.table.length; i++) { // i = column
+			for (var j = 0; j < this.table[i].length; j++) { // j = row
+				this.htmlTable.rows[j].cells[i].innerHTML = this.table[i][j];
+			}
+		}
 	}
 }
 
@@ -58,3 +63,4 @@ var Board = {
 Board.createNumbers();
 Board.createLetters();
 Board.displayNumbers();
+console.log(Board.htmlTable);
