@@ -142,7 +142,7 @@ var BoardMode = {
 				if (Editable.isEditable){
 					Editable.toggle();
 				}
-				$(".customize-button").show();
+				$(".customize-button").css({'background-color':'blue', 'color':'#01CCFE'});
 				this.mode = "Custom";
 				Board.displayCustom();
 				break;
@@ -150,7 +150,7 @@ var BoardMode = {
 				if (Editable.isEditable){
 					Editable.toggle();
 				}
-				$(".customize-button").hide();
+				$(".customize-button").css({'background-color':'#8A8CC0', 'color':'#000000'}); 
 				this.mode = "Autogen";
 				Board.displayNumbers();
 				break;
@@ -158,7 +158,7 @@ var BoardMode = {
 				if (Editable.isEditable){
 					Editable.toggle();
 				}
-				$(".customize-button").show();
+				$(".customize-button").css({'background-color':'blue', 'color':'#01CCFE'});
 				this.mode = "Images";
 				break;
 		}
@@ -172,7 +172,8 @@ var Editable = {
  		if (BoardMode.mode == "Custom") {
 	 		if (this.isEditable){
 	 			this.isEditable = false;
-	 			$(".shuffle-button").show();
+
+	 			$(".shuffle-button").css({'background-color':'blue', 'color':'#01CCFE'});
 	 			$("#IdEditable").attr("value","Customize");		
 	 			for (var i = 0; i < this.squares.length; i++) {
 					this.squares[i].setAttribute('contenteditable', 'false');
@@ -180,7 +181,8 @@ var Editable = {
 	 		}
 	 		else {
 	 			this.isEditable = true;
-	 			$(".shuffle-button").hide();
+
+	 			$(".shuffle-button").css({'background-color':'#8A8CC0', 'color':'#000000'}); 
 	 			$("#IdEditable").attr("value","Play");
 	 			for (var i = 0; i < this.squares.length; i++) {
 					this.squares[i].setAttribute('contenteditable', 'true');
@@ -227,7 +229,7 @@ function toggleEditable() {
 }
 
 function shuffleContents() {
-	if (BoardMode.mode == "Custom"){
+	if (BoardMode.mode == "Custom" && !Editable.isEditable){
 		var newBoard = new Array(Board.grid.length);
 		for (var i = 0; i < Board.grid.length; i++) {
 			while (1) {
@@ -318,4 +320,4 @@ if ((red<255) && (blue<255) && (green<255)) {
 Board.createNumbers();
 Board.createLetters();
 Board.displayNumbers();
-$(".customize-button").hide();
+//$(".customize-button").hide();
