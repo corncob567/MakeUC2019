@@ -17,7 +17,7 @@ input{
 <body>
 
 <h1>Bingo Blue</h1>
-<div class="grid-container">
+<div id="cell" class="grid-container">
   <div class="grid-item"><img src=""></div>
   <div class="grid-item">2<img src=""></div>
   <div class="grid-item">3<img src=""></div>  
@@ -44,20 +44,20 @@ input{
   <div class="grid-item">6<img src=""></div>  
   <div class="grid-item">7<img src=""></div>
 </div>
-<script type="text/javascript" src="scripts.js"></script>
 <select id="modeSelect" onchange="updateMode()">
   <option value="Autogen">Autogen</option>
   <option value="Custom">Custom</option>
   <option value="Images">Images</option>
 </select>
 <form>
-<input class = "customize-button" id="IdEditable" hidden="true" type="button" onclick="toggleEditable()" value="Customize" name="EditButton">
+<input class = "customize-button" id="IdEditable" type="button" onclick="toggleEditable()" value="Customize" name="EditButton">
 </form>
 <form>
-<input class = "shuffle-button" type="button" onclick="shuffleContents()" value="Shuffle">
+<input class = "shuffle-button" id="IdShuffle" type="button" onclick="shuffleContents()" value="Shuffle" name="ShuffleButton">
 </form>
 <form>
 <input type="checkbox" onclick="toggleFreeSpace()" value="Free Space"> Free Space<br>
 </form>
 </body>
+<script type="text/javascript" src="scripts.js"></script>
 </html>
