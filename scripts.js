@@ -184,7 +184,14 @@ $(document).ready(function() {
 });
 
 
-
+jQuery.fn.victory = functinon() {
+	if (checkWin() = true){
+		alert("Bingo?")
+		$this.dialog("Bingo!")
+		$this.dialog("Cancel")
+	}
+}
+	
 		
 
 
