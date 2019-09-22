@@ -8,8 +8,10 @@ function Create2DArray(rows, columns) {
   	return arr;
 }
 
+// Make these non-global at some point if that's possible.
 var width = 5;
 var height = 5;
+
 var Board = {
 	grid : document.getElementsByClassName('grid-item'),
 	//width : new Number('5'),
@@ -81,13 +83,13 @@ var Board = {
 		}
 	},
 	checkWin : function() {
-		//get colors
+		// Getting current colors/selected.
 		win = false;
 		colorArray = [];
 		winArray = [];
+		winTestArray = [];
 		for (var i = 0; i < this.grid.length; i++) {
 			colorArray[i] = getComputedStyle(this.grid[i]).backgroundColor;
-			
 			if (colorArray[i] == "rgb(160, 160, 160)"){
 				colorArray[i] = true;
 			}
@@ -96,29 +98,26 @@ var Board = {
 			}
 		}
 
+		// Checking rows.
 		for(var i = 0; i < 5; i++){
 			winArray = colorArray.slice(i*5, (i*5)+5);
-
 			if(winArray[0] == true && winArray[1] == true && winArray[2] == true && winArray[3] == true && winArray[4] == true){
 				win = true;
 			}
 		}
 
-
 		winArray = [];
 
-		for(var i = 0; i < 5; i++){
-			for(var j = i; j < 25; j = j + 5){
-				winArray.push(colorArray[j]);
+		// Checking columns.
+		for(var i = 0; i < 5; i++){ // Reads in a certain column.
+			for(var j = i; j < 25; j = j + 5){ // Gets elements from a specific column (specified by i)
+			winTestArray.push(colorArray[j]);
 			}
-			for(var i = 0; i < 5; i ++){
-				winTestArray = winArray.slice(i*5, (i*5) + 5);
 
-
-				if(winTestArray[0] == true && winTestArray[1] == true && winTestArray[2] == true && winTestArray[3] == true && winTestArray[4] == true){
-					win = true;
-				}
+			if(winTestArray[0] == true && winTestArray[1] == true && winTestArray[2] == true && winTestArray[3] == true && winTestArray[4] == true){
+				win = true;
 			}
+			winTestArray = [];
 		}
 
 	DiagArrayOne = [colorArray[0], colorArray[6], colorArray[12],colorArray[18],colorArray[24]];
@@ -127,21 +126,16 @@ var Board = {
 	if(DiagArrayOne[0] == true && DiagArrayOne[1] == true && DiagArrayOne[2] == true && DiagArrayOne[3] == true && DiagArrayOne[4] == true){
 		win = true;
 	}
-
-
 	if(DiagArrayTwo[0] == true && DiagArrayTwo[1] == true && DiagArrayTwo[2] == true && DiagArrayTwo[3] == true && DiagArrayTwo[4] == true){
 		win = true;
 	}
-
 	console.log(winArray);
 	if(win==true){
 		alert("BINGO");
 	}
 	console.log(win);
 	return win;
-		
 	}
-
 }
 
 var BoardMode = {
@@ -281,9 +275,9 @@ $(document).ready(function() {
 	$(".grid-item").click(function() {
 		if (!Editable.isEditable) {	
     		$(this).darken();
-
+    		// Checks for a win each time a square is pressed.
     		if(boardCheckWin()){
-    			alert("BINGO");
+    			alert("BINGO"); // Make this something better.
     		}
 
     	}
@@ -337,7 +331,7 @@ if ((red<255) && (blue<255) && (green<255)) {
   return this;
 }
 
+// Initializes the board on webpage startup/refresh
 Board.createNumbers();
 Board.createLetters();
 Board.displayNumbers();
-//$(".customize-button").hide();

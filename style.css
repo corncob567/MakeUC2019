@@ -28,11 +28,10 @@ body{
 h1 {
         font-family: 'Georgia', serif;
         font-size: 48px;
-        color: blue;
+        color: lightblue;
         text-align: center;
 
 }
-
 
 img{
 	object-fit: none;
