@@ -10,3 +10,4 @@ Bingo Blue is a website that you can use to play traditional bingo or add your o
 https://makeuc.io
 
 # Website link
+https://corncob567.github.io/MakeUC2019
