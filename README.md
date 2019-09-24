@@ -3,7 +3,7 @@ Bingo Blue is a website that you can use to play traditional bingo or add your o
 
 # Made by
 
-@abaldwin, @baruyogesh, @corncob567, @wpritschau
+@abaldwin, @baruyogesh, @corncob567, @irrerno
 
 # Made for
 
