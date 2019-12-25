@@ -36,35 +36,9 @@ h1 {
 img{
 	object-fit: none;
 }
-
-.customize-button{
-	width: 100px;
-	position: relative;
-  top: 90px;
-	margin: center;
-	background-color: #8A8CC0;
-	border: none;
-	color: #000000;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
+.buttons{
+	padding-bottom;
 }
-.shuffle-button{
-	width: 100px;
-	position: relative;
-	top: 90px;
-	margin: center;
-	background-color: blue;
-	border: none;
-	color: #01CCFE;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-}
-.clear-button{
-	position: relative;
-}
-
 
 
 
