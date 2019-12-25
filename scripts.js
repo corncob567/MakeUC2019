@@ -135,6 +135,15 @@ var Board = {
 	}
 	console.log(win);
 	return win;
+	},
+
+	clearBoard : function() {
+		squares = document.getElementsByClassName("grid-item");
+
+		for(let i = 0; i< squares.length; i++){
+			squares[i].style.backgroundColor = "rgb(255, 255, 255)"
+		}
+		
 	}
 }
 
@@ -233,6 +242,9 @@ function toggleEditable() {
 	Editable.toggle();
 }
 
+function clearBoard() {
+	Board.clearBoard();
+}
 function shuffleContents() {
 	if (BoardMode.mode == "Custom" && !Editable.isEditable){
 		var newBoard = new Array(Board.grid.length);
